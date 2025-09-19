@@ -1,0 +1,264 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Image Processor Configuration",
+    "description": "Configure image processing pipeline settings for batch operations",
+    "properties": {
+        "processor_name": {
+            "type": "string",
+            "default": "ImageProcessor",
+            "description": "Name for this processor configuration",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "input_format": {
+            "type": "string",
+            "enum": [
+                "JPEG",
+                "PNG",
+                "WEBP",
+                "BMP",
+                "TIFF",
+                "GIF"
+            ],
+            "default": "JPEG",
+            "description": "Expected input image format"
+        },
+        "output_format": {
+            "type": "string",
+            "enum": [
+                "JPEG",
+                "PNG",
+                "WEBP",
+                "Original"
+            ],
+            "default": "Original",
+            "description": "Output image format (Original keeps input format)"
+        },
+        "resize_mode": {
+            "type": "string",
+            "enum": [
+                "none",
+                "fit",
+                "fill",
+                "exact",
+                "thumbnail"
+            ],
+            "default": "none",
+            "description": "How to resize images"
+        },
+        "target_width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192,
+            "default": 1920,
+            "description": "Target width in pixels (when resize_mode is not 'none')"
+        },
+        "target_height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192,
+            "default": 1080,
+            "description": "Target height in pixels (when resize_mode is not 'none')"
+        },
+        "quality": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 85,
+            "description": "JPEG/WEBP quality (1-100, higher is better quality)"
+        },
+        "brightness": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 2.0,
+            "default": 1.0,
+            "description": "Brightness adjustment (1.0 = no change)"
+        },
+        "contrast": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 2.0,
+            "default": 1.0,
+            "description": "Contrast adjustment (1.0 = no change)"
+        },
+        "saturation": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 2.0,
+            "default": 1.0,
+            "description": "Saturation adjustment (1.0 = no change)"
+        },
+        "sharpness": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 10.0,
+            "default": 0.0,
+            "description": "Sharpness enhancement (0 = no sharpening)"
+        },
+        "auto_orient": {
+            "type": "boolean",
+            "default": true,
+            "description": "Automatically orient images based on EXIF data"
+        },
+        "preserve_metadata": {
+            "type": "boolean",
+            "default": false,
+            "description": "Preserve EXIF and other metadata"
+        },
+        "strip_color_profile": {
+            "type": "boolean",
+            "default": false,
+            "description": "Remove embedded color profiles to reduce file size"
+        },
+        "enable_watermark": {
+            "type": "boolean",
+            "default": false,
+            "description": "Add watermark to processed images"
+        },
+        "watermark_text": {
+            "type": ["string", "null"],
+            "default": null,
+            "description": "Watermark text (if watermark is enabled)",
+            "examples": ["© 2024 MyCompany", "DRAFT", "CONFIDENTIAL"]
+        },
+        "watermark_position": {
+            "type": "string",
+            "enum": [
+                "top-left",
+                "top-center",
+                "top-right",
+                "center",
+                "bottom-left",
+                "bottom-center",
+                "bottom-right"
+            ],
+            "default": "bottom-right",
+            "description": "Position of watermark on image"
+        },
+        "watermark_opacity": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "default": 0.5,
+            "description": "Watermark opacity (0 = transparent, 1 = opaque)"
+        },
+        "batch_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 10,
+            "description": "Number of images to process in parallel"
+        },
+        "output_directory": {
+            "type": ["string", "null"],
+            "default": "./output",
+            "description": "Directory for processed images",
+            "examples": ["./processed", "/tmp/images", "~/Pictures/output"]
+        },
+        "filename_pattern": {
+            "type": "string",
+            "default": "{name}_processed.{ext}",
+            "description": "Pattern for output filenames",
+            "examples": [
+                "{name}_processed.{ext}",
+                "{name}_{width}x{height}.{ext}",
+                "{date}_{name}.{ext}"
+            ],
+            "pattern": ".*\\{name\\}.*"
+        },
+        "skip_errors": {
+            "type": "boolean",
+            "default": true,
+            "description": "Continue processing if individual images fail"
+        },
+        "verbose_logging": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable detailed logging of operations"
+        },
+        "max_file_size_mb": {
+            "type": ["number", "null"],
+            "minimum": 0.1,
+            "maximum": 100.0,
+            "default": null,
+            "description": "Maximum file size in MB (null = no limit)"
+        },
+        "allowed_extensions": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff", ".gif"]
+            },
+            "default": [".jpg", ".jpeg", ".png"],
+            "description": "File extensions to process"
+        },
+        "color_mode": {
+            "type": "string",
+            "enum": [
+                "RGB",
+                "RGBA",
+                "Grayscale",
+                "Black & White"
+            ],
+            "default": "RGB",
+            "description": "Color mode for output images"
+        },
+        "rotation": {
+            "type": "integer",
+            "enum": [0, 90, 180, 270],
+            "default": 0,
+            "description": "Rotation angle in degrees (clockwise)"
+        },
+        "flip_horizontal": {
+            "type": "boolean",
+            "default": false,
+            "description": "Mirror image horizontally"
+        },
+        "flip_vertical": {
+            "type": "boolean",
+            "default": false,
+            "description": "Mirror image vertically"
+        },
+        "cache_enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable caching of processed images"
+        },
+        "cache_directory": {
+            "type": ["string", "null"],
+            "default": null,
+            "description": "Directory for cached images (null = system temp)"
+        },
+        "api_endpoint": {
+            "type": ["string", "null"],
+            "format": "uri",
+            "default": null,
+            "description": "Optional API endpoint for cloud processing",
+            "examples": ["https://api.example.com/process", "https://imageservice.local/v1"]
+        },
+        "api_key": {
+            "type": ["string", "null"],
+            "default": null,
+            "description": "API key for cloud processing service"
+        },
+        "webhook_url": {
+            "type": ["string", "null"],
+            "format": "uri",
+            "default": null,
+            "description": "Webhook URL for completion notifications"
+        },
+        "notification_email": {
+            "type": ["string", "null"],
+            "format": "email",
+            "default": null,
+            "description": "Email address for processing notifications"
+        }
+    },
+    "required": [
+        "processor_name",
+        "input_format",
+        "output_format"
+    ],
+    "additionalProperties": false
+}

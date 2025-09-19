@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "cjm-fasthtml-jsonschema"
+  site-url: "https://cj-mills.github.io/cjm-fasthtml-jsonschema"
+  description: "Library for converting JSON Schema configs to FastHTML user interfaces."
+  repo-branch: main
+  repo-url: "https://github.com/cj-mills/cjm-fasthtml-jsonschema"

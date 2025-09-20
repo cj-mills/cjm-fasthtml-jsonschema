@@ -9,6 +9,32 @@
 pip install cjm_fasthtml_jsonschema
 ```
 
+## Demo Application
+
+Run the demo to see the library in action:
+
+``` bash
+python demo_app.py
+```
+
+Then visit:
+
+- http://localhost:5001/ - Demo page with example form from
+  \`./test_files/
+
+``` bash
+$ python ./demo_app.py -h
+usage: demo_app.py [-h] [--schema SCHEMA] [--port PORT] [--host HOST]
+
+JSON Schema to UI Demo Application
+
+options:
+  -h, --help       show this help message and exit
+  --schema SCHEMA  Path to the JSON schema file (default: test_files/voxtral_config_schema.json)
+  --port PORT      Port to run the server on (default: 5001)
+  --host HOST      Host to run the server on (default: 0.0.0.0)
+```
+
 ## Project Structure
 
     nbs/

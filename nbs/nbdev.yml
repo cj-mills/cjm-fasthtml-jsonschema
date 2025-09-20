@@ -4,6 +4,6 @@ project:
 website:
   title: "cjm-fasthtml-jsonschema"
   site-url: "https://cj-mills.github.io/cjm-fasthtml-jsonschema"
-  description: "Library for genearating FastHTML user interfaces from JSON Schema configurations."
+  description: "Library for generating FastHTML user interfaces from JSON Schema configurations."
   repo-branch: main
   repo-url: "https://github.com/cj-mills/cjm-fasthtml-jsonschema"

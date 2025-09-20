@@ -20,7 +20,7 @@ python demo_app.py
 Then visit:
 
 - http://localhost:5001/ - Demo page with example form from
-  \`./test_files/
+  `./test_files/`
 
 ``` bash
 $ python ./demo_app.py -h

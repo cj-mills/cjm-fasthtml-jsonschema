@@ -156,3 +156,4 @@ checklink/cookies.txt
 # Custom
 *.sesskey
 *.claude
+/notebooks/

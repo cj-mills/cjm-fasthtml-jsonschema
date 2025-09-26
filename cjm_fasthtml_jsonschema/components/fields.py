@@ -270,7 +270,8 @@ def create_range_field(
         "min": str(prop.minimum or 0),
         "max": str(prop.maximum or 100),
         "value": str(current_value),
-        "cls": combine_classes(range_dui, range_colors.primary, w.full)
+        "cls": combine_classes(range_dui, range_colors.primary, w.full),
+        "oninput": f"document.getElementById('range-value-{prop.name}').textContent = 'Current: ' + this.value"
     }
 
     if prop.type == "integer":
@@ -284,6 +285,7 @@ def create_range_field(
                 Span(str(prop.minimum or 0), cls=str(font_size.xs)),
                 Span(
                     f"Current: {current_value}",
+                    id=f"range-value-{prop.name}",
                     cls=combine_classes(font_weight.medium, text_dui.primary)
                 ),
                 Span(str(prop.maximum or 100), cls=str(font_size.xs)),

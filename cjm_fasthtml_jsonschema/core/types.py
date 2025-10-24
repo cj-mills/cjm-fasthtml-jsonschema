@@ -21,7 +21,7 @@ class SchemaProperty:
     @property
     def type(
         self
-    ) -> str:  # TODO: Add return description
+    ) -> str:  # The property's type (e.g., 'string', 'number', 'boolean')
         """Get the property type."""
         prop_type = self.schema.get('type', 'string')
         if isinstance(prop_type, list):
@@ -33,7 +33,7 @@ class SchemaProperty:
     @property
     def is_nullable(
         self
-    ) -> bool:  # TODO: Add return description
+    ) -> bool:  # True if the property allows null values
         """Check if property allows null values."""
         prop_type = self.schema.get('type')
         if isinstance(prop_type, list):
@@ -43,69 +43,69 @@ class SchemaProperty:
     @property
     def default(
         self
-    ) -> Any:  # TODO: Add return description
+    ) -> Any:  # The default value for this property, or None if not specified
         """Get default value if specified."""
         return self.schema.get('default')
 
     @property
     def description(
         self
-    ) -> Optional[str]:  # TODO: Add return description
+    ) -> Optional[str]:  # The property's description text, or None if not provided
         """Get property description."""
         return self.schema.get('description')
 
     @property
     def enum_values(
         self
-    ) -> Optional[List[Any]]:  # TODO: Add return description
+    ) -> Optional[List[Any]]:  # List of allowed enum values, or None if not an enum
         """Get enum values if property is an enum."""
         return self.schema.get('enum')
 
     @property
     def examples(
         self
-    ) -> Optional[List[Any]]:  # TODO: Add return description
+    ) -> Optional[List[Any]]:  # List of example values, or None if not provided
         """Get example values if provided."""
         return self.schema.get('examples')
 
     @property
     def minimum(
         self
-    ) -> Optional[Union[int, float]]:  # TODO: Add return description
+    ) -> Optional[Union[int, float]]:  # Minimum allowed value for numeric types, or None if not specified
         """Get minimum value for numeric types."""
         return self.schema.get('minimum')
 
     @property
     def maximum(
         self
-    ) -> Optional[Union[int, float]]:  # TODO: Add return description
+    ) -> Optional[Union[int, float]]:  # Maximum allowed value for numeric types, or None if not specified
         """Get maximum value for numeric types."""
         return self.schema.get('maximum')
 
     @property
     def min_length(
         self
-    ) -> Optional[int]:  # TODO: Add return description
+    ) -> Optional[int]:  # Minimum length for string types, or None if not specified
         """Get minimum length for string types."""
         return self.schema.get('minLength')
 
     @property
     def max_length(
         self
-    ) -> Optional[int]:  # TODO: Add return description
+    ) -> Optional[int]:  # Maximum length for string types, or None if not specified
         """Get maximum length for string types."""
         return self.schema.get('maxLength')
 
     @property
     def pattern(
         self
-    ) -> Optional[str]:  # TODO: Add return description
+    ) -> Optional[str]:  # Regex pattern for string validation, or None if not specified
         """Get regex pattern for string validation."""
         return self.schema.get('pattern')
 
     @property
     def format(
         self
-    ) -> Optional[str]:  # TODO: Add return description
+    ) -> Optional[str]:  # Format hint (e.g., 'email', 'uri', 'date'), or None if not specified
         """Get format hint (e.g., 'email', 'uri', 'date')."""
         return self.schema.get('format')

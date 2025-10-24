@@ -22,13 +22,13 @@ from ..components.fields import create_field
 
 # %% ../../nbs/generators/form.ipynb 4
 def generate_form_ui(
-    schema: Dict[str, Any],
-    values: Optional[Dict[str, Any]] = None,
+    schema: Dict[str, Any],  # JSON Schema dictionary
+    values: Optional[Dict[str, Any]] = None,  # Optional dictionary of current values
     show_title: bool = True,  # Whether to show the schema title
     show_description: bool = True,  # Whether to show schema description
     compact: bool = False,  # Use compact layout (less spacing)
     card_wrapper: bool = True  # Wrap the form in a card component
-) -> FT:
+) -> FT:  # FastHTML component containing the generated form UI
     """Generate a FastHTML form UI from a JSON Schema."""
     # Parse the schema
     parser = SchemaParser(schema)

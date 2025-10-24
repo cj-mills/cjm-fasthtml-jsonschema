@@ -17,9 +17,7 @@ class SchemaParser:
         self,
         schema: Dict[str, Any]  # JSON Schema dictionary
     ):
-        """
-        Initialize parser with a JSON Schema.
-        """
+        """Initialize parser with a JSON Schema."""
         self.schema = schema
         self.title = schema.get('title', 'Configuration')
         self.description = schema.get('description')
@@ -29,9 +27,7 @@ class SchemaParser:
     def _parse_properties(
         self
     ) -> List[SchemaProperty]:  # List of SchemaProperty objects
-        """
-        Parse schema properties into SchemaProperty objects.
-        """
+        """Parse schema properties into SchemaProperty objects."""
         properties = []
         schema_props = self.schema.get('properties', {})
 
@@ -52,9 +48,7 @@ class SchemaParser:
         self,
         name: str  # Property name
     ) -> Optional[SchemaProperty]:  # SchemaProperty object or None if not found
-        """
-        Get a specific property by name.            
-        """
+        """Get a specific property by name."""
         for prop in self.properties:
             if prop.name == name:
                 return prop
@@ -62,12 +56,12 @@ class SchemaParser:
 
     def get_required_properties(
         self
-    ) -> List[SchemaProperty]:  # TODO: Add return description
+    ) -> List[SchemaProperty]:  # List of all required SchemaProperty objects
         """Get all required properties."""
         return [p for p in self.properties if p.required]
 
     def get_optional_properties(
         self
-    ) -> List[SchemaProperty]:  # TODO: Add return description
+    ) -> List[SchemaProperty]:  # List of all optional SchemaProperty objects
         """Get all optional properties."""
         return [p for p in self.properties if not p.required]

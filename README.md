@@ -59,8 +59,8 @@ graph LR
 
     components_fields --> core_types
     core_parser --> core_types
-    generators_form --> components_fields
     generators_form --> core_parser
+    generators_form --> components_fields
 ```
 
 *4 cross-module dependencies detected*
@@ -172,13 +172,13 @@ from cjm_fasthtml_jsonschema.generators.form import (
 
 ``` python
 def generate_form_ui(
-    schema: Dict[str, Any],
-    values: Optional[Dict[str, Any]] = None,
+    schema: Dict[str, Any],  # JSON Schema dictionary
+    values: Optional[Dict[str, Any]] = None,  # Optional dictionary of current values
     show_title: bool = True,  # Whether to show the schema title
     show_description: bool = True,  # Whether to show schema description
     compact: bool = False,  # Use compact layout (less spacing)
     card_wrapper: bool = True  # Wrap the form in a card component
-) -> FT
+) -> FT:  # FastHTML component containing the generated form UI
     "Generate a FastHTML form UI from a JSON Schema."
 ```
 
@@ -218,12 +218,12 @@ class SchemaParser:
     
     def get_required_properties(
             self
-        ) -> List[SchemaProperty]:  # TODO: Add return description
+        ) -> List[SchemaProperty]:  # List of all required SchemaProperty objects
         "Get all required properties."
     
     def get_optional_properties(
             self
-        ) -> List[SchemaProperty]:  # TODO: Add return description
+        ) -> List[SchemaProperty]:  # List of all optional SchemaProperty objects
         "Get all optional properties."
 ```
 
@@ -253,61 +253,61 @@ class SchemaProperty:
     
     def type(
             self
-        ) -> str:  # TODO: Add return description
+        ) -> str:  # The property's type (e.g., 'string', 'number', 'boolean')
         "Get the property type."
     
     def is_nullable(
             self
-        ) -> bool:  # TODO: Add return description
+        ) -> bool:  # True if the property allows null values
         "Check if property allows null values."
     
     def default(
             self
-        ) -> Any:  # TODO: Add return description
+        ) -> Any:  # The default value for this property, or None if not specified
         "Get default value if specified."
     
     def description(
             self
-        ) -> Optional[str]:  # TODO: Add return description
+        ) -> Optional[str]:  # The property's description text, or None if not provided
         "Get property description."
     
     def enum_values(
             self
-        ) -> Optional[List[Any]]:  # TODO: Add return description
+        ) -> Optional[List[Any]]:  # List of allowed enum values, or None if not an enum
         "Get enum values if property is an enum."
     
     def examples(
             self
-        ) -> Optional[List[Any]]:  # TODO: Add return description
+        ) -> Optional[List[Any]]:  # List of example values, or None if not provided
         "Get example values if provided."
     
     def minimum(
             self
-        ) -> Optional[Union[int, float]]:  # TODO: Add return description
+        ) -> Optional[Union[int, float]]:  # Minimum allowed value for numeric types, or None if not specified
         "Get minimum value for numeric types."
     
     def maximum(
             self
-        ) -> Optional[Union[int, float]]:  # TODO: Add return description
+        ) -> Optional[Union[int, float]]:  # Maximum allowed value for numeric types, or None if not specified
         "Get maximum value for numeric types."
     
     def min_length(
             self
-        ) -> Optional[int]:  # TODO: Add return description
+        ) -> Optional[int]:  # Minimum length for string types, or None if not specified
         "Get minimum length for string types."
     
     def max_length(
             self
-        ) -> Optional[int]:  # TODO: Add return description
+        ) -> Optional[int]:  # Maximum length for string types, or None if not specified
         "Get maximum length for string types."
     
     def pattern(
             self
-        ) -> Optional[str]:  # TODO: Add return description
+        ) -> Optional[str]:  # Regex pattern for string validation, or None if not specified
         "Get regex pattern for string validation."
     
     def format(
             self
-        ) -> Optional[str]:  # TODO: Add return description
+        ) -> Optional[str]:  # Format hint (e.g., 'email', 'uri', 'date'), or None if not specified
         "Get format hint (e.g., 'email', 'uri', 'date')."
 ```

@@ -40,19 +40,21 @@ options:
     nbs/
     ├── components/ (1)
     │   └── fields.ipynb  # Field component generators for different JSON Schema types.
-    ├── core/ (2)
-    │   ├── parser.ipynb  # JSON Schema parsing utilities.
-    │   └── types.ipynb   # Type definitions for JSON Schema elements.
+    ├── core/ (3)
+    │   ├── dataclass.ipynb  # Dataclass-to-JSON-schema conversion utilities for form generation
+    │   ├── parser.ipynb     # JSON Schema parsing utilities.
+    │   └── types.ipynb      # Type definitions for JSON Schema elements.
     └── generators/ (1)
         └── form.ipynb  # Main form generator that creates UI from JSON Schema.
 
-Total: 4 notebooks across 3 directories
+Total: 5 notebooks across 3 directories
 
 ## Module Dependencies
 
 ``` mermaid
 graph LR
     components_fields[components.fields<br/>fields]
+    core_dataclass[core.dataclass<br/>Dataclass Utilities]
     core_parser[core.parser<br/>parser]
     core_types[core.types<br/>types]
     generators_form[generators.form<br/>form]
@@ -72,6 +74,57 @@ No CLI commands found in this project.
 ## Module Overview
 
 Detailed documentation for each module in the project:
+
+### Dataclass Utilities (`dataclass.ipynb`)
+
+> Dataclass-to-JSON-schema conversion utilities for form generation
+
+#### Import
+
+``` python
+from cjm_fasthtml_jsonschema.core.dataclass import (
+    SCHEMA_TITLE,
+    SCHEMA_DESC,
+    SCHEMA_MIN,
+    SCHEMA_MAX,
+    SCHEMA_ENUM,
+    SCHEMA_MIN_LEN,
+    SCHEMA_MAX_LEN,
+    SCHEMA_PATTERN,
+    SCHEMA_FORMAT,
+    dataclass_to_jsonschema
+)
+```
+
+#### Functions
+
+``` python
+def _python_type_to_json_type(
+    python_type: type  # Python type annotation to convert
+) -> Dict[str, Any]:  # JSON schema type definition
+    "Convert Python type to JSON schema type."
+```
+
+``` python
+def dataclass_to_jsonschema(
+    cls: type  # Dataclass with field metadata
+) -> Dict[str, Any]:  # JSON schema dictionary
+    "Convert a dataclass to a JSON schema for form generation."
+```
+
+#### Variables
+
+``` python
+SCHEMA_TITLE = 'title'  # Display title for the field
+SCHEMA_DESC = 'description'  # Help text description
+SCHEMA_MIN = 'minimum'  # Minimum value for numbers
+SCHEMA_MAX = 'maximum'  # Maximum value for numbers
+SCHEMA_ENUM = 'enum'  # Allowed values for dropdowns
+SCHEMA_MIN_LEN = 'minLength'  # Minimum string length
+SCHEMA_MAX_LEN = 'maxLength'  # Maximum string length
+SCHEMA_PATTERN = 'pattern'  # Regex pattern for strings
+SCHEMA_FORMAT = 'format'  # String format (email, uri, date, etc.)
+```
 
 ### fields (`fields.ipynb`)
 

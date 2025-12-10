@@ -1,0 +1,160 @@
+[
+  {
+    "objectID": "core/dataclass.html",
+    "href": "core/dataclass.html",
+    "title": "Dataclass Utilities",
+    "section": "",
+    "text": "Constants for field metadata keys used in dataclass-to-JSON-schema conversion. Use these in dataclass field metadata dicts to control JSON schema generation.",
+    "crumbs": [
+      "core",
+      "Dataclass Utilities"
+    ]
+  },
+  {
+    "objectID": "core/dataclass.html#schema-metadata-constants",
+    "href": "core/dataclass.html#schema-metadata-constants",
+    "title": "Dataclass Utilities",
+    "section": "",
+    "text": "Constants for field metadata keys used in dataclass-to-JSON-schema conversion. Use these in dataclass field metadata dicts to control JSON schema generation.",
+    "crumbs": [
+      "core",
+      "Dataclass Utilities"
+    ]
+  },
+  {
+    "objectID": "core/dataclass.html#type-conversion",
+    "href": "core/dataclass.html#type-conversion",
+    "title": "Dataclass Utilities",
+    "section": "Type Conversion",
+    "text": "Type Conversion\n\n# Test type conversion\nfrom typing import List, Optional\n\nassert _python_type_to_json_type(str) == {\"type\": \"string\"}\nassert _python_type_to_json_type(int) == {\"type\": \"integer\"}\nassert _python_type_to_json_type(float) == {\"type\": \"number\"}\nassert _python_type_to_json_type(bool) == {\"type\": \"boolean\"}\nassert _python_type_to_json_type(List[str]) == {\"type\": \"array\", \"items\": {\"type\": \"string\"}}\nprint(\"Type conversion tests passed\")\n\nType conversion tests passed",
+    "crumbs": [
+      "core",
+      "Dataclass Utilities"
+    ]
+  },
+  {
+    "objectID": "core/dataclass.html#dataclass-to-json-schema-conversion",
+    "href": "core/dataclass.html#dataclass-to-json-schema-conversion",
+    "title": "Dataclass Utilities",
+    "section": "Dataclass to JSON Schema Conversion",
+    "text": "Dataclass to JSON Schema Conversion\n\nsource\n\ndataclass_to_jsonschema\n\n dataclass_to_jsonschema (cls:type)\n\nConvert a dataclass to a JSON schema for form generation.\n\n\n\n\nType\nDetails\n\n\n\n\ncls\ntype\nDataclass with field metadata\n\n\nReturns\nDict\nJSON schema dictionary\n\n\n\n\n# Test dataclass_to_jsonschema\nfrom dataclasses import dataclass, field\nfrom typing import ClassVar\n\n@dataclass\nclass TestConfig:\n    __schema_name__: ClassVar[str] = \"test_config\"\n    __schema_title__: ClassVar[str] = \"Test Configuration\"\n    __schema_description__: ClassVar[str] = \"A test configuration\"\n    \n    name: str = field(\n        default=\"default\",\n        metadata={SCHEMA_TITLE: \"Name\", SCHEMA_DESC: \"The name\"}\n    )\n    count: int = field(\n        default=10,\n        metadata={SCHEMA_TITLE: \"Count\", SCHEMA_MIN: 1, SCHEMA_MAX: 100}\n    )\n    tags: list = field(\n        default_factory=list,\n        metadata={SCHEMA_TITLE: \"Tags\"}\n    )\n\nschema = dataclass_to_jsonschema(TestConfig)\nassert schema[\"name\"] == \"test_config\"\nassert schema[\"title\"] == \"Test Configuration\"\nassert schema[\"properties\"][\"name\"][\"title\"] == \"Name\"\nassert schema[\"properties\"][\"count\"][\"minimum\"] == 1\nassert schema[\"properties\"][\"count\"][\"maximum\"] == 100\nassert schema[\"properties\"][\"tags\"][\"default\"] == []\nprint(\"dataclass_to_jsonschema tests passed\")\n\ndataclass_to_jsonschema tests passed",
+    "crumbs": [
+      "core",
+      "Dataclass Utilities"
+    ]
+  },
+  {
+    "objectID": "core/parser.html",
+    "href": "core/parser.html",
+    "title": "parser",
+    "section": "",
+    "text": "source\n\nSchemaParser\n\n SchemaParser (schema:Dict[str,Any])\n\nParse JSON Schema and extract property information.\n\n\n\n\nType\nDetails\n\n\n\n\nschema\nDict\nJSON Schema dictionary",
+    "crumbs": [
+      "core",
+      "parser"
+    ]
+  },
+  {
+    "objectID": "components/fields.html",
+    "href": "components/fields.html",
+    "title": "fields",
+    "section": "",
+    "text": "source\n\ncreate_label\n\n create_label (prop:cjm_fasthtml_jsonschema.core.types.SchemaProperty)\n\nCreate a label for a field.\n\n\n\n\nType\nDetails\n\n\n\n\nprop\nSchemaProperty\nSchemaProperty object\n\n\nReturns\nFT\nLabel component\n\n\n\n\nsource\n\n\ncreate_description\n\n create_description\n                     (prop:cjm_fasthtml_jsonschema.core.types.SchemaProper\n                     ty)\n\nCreate a description/help text for a field.\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nprop\nSchemaProperty\nSchemaProperty object\n\n\nReturns\nOptional\nP component with description or None\n\n\n\n\nsource\n\n\ncreate_string_field\n\n create_string_field\n                      (prop:cjm_fasthtml_jsonschema.core.types.SchemaPrope\n                      rty, value:Any=None)\n\nCreate a string input field.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field\n\n\n\n\nsource\n\n\ncreate_enum_field\n\n create_enum_field\n                    (prop:cjm_fasthtml_jsonschema.core.types.SchemaPropert\n                    y, value:Any=None)\n\nCreate an enum select dropdown field.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field\n\n\n\n\nsource\n\n\ncreate_number_field\n\n create_number_field\n                      (prop:cjm_fasthtml_jsonschema.core.types.SchemaPrope\n                      rty, value:Any=None)\n\nCreate a number input field.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field\n\n\n\n\nsource\n\n\ncreate_range_field\n\n create_range_field\n                     (prop:cjm_fasthtml_jsonschema.core.types.SchemaProper\n                     ty, value:Any=None)\n\nCreate a range slider field.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field\n\n\n\n\nsource\n\n\ncreate_boolean_field\n\n create_boolean_field\n                       (prop:cjm_fasthtml_jsonschema.core.types.SchemaProp\n                       erty, value:Any=None)\n\nCreate a boolean toggle field.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field\n\n\n\n\nsource\n\n\ncreate_field\n\n create_field (prop:cjm_fasthtml_jsonschema.core.types.SchemaProperty,\n               value:Any=None)\n\nCreate an appropriate field based on the property type.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nprop\nSchemaProperty\n\nSchemaProperty object\n\n\nvalue\nAny\nNone\nCurrent value\n\n\nReturns\nFT\n\nDiv containing the field",
+    "crumbs": [
+      "components",
+      "fields"
+    ]
+  },
+  {
+    "objectID": "generators/form.html",
+    "href": "generators/form.html",
+    "title": "form",
+    "section": "",
+    "text": "source\n\ngenerate_form_ui\n\n generate_form_ui (schema:Dict[str,Any],\n                   values:Optional[Dict[str,Any]]=None,\n                   show_title:bool=True, show_description:bool=True,\n                   compact:bool=False, card_wrapper:bool=True)\n\nGenerate a FastHTML form UI from a JSON Schema.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nschema\nDict\n\nJSON Schema dictionary\n\n\nvalues\nOptional\nNone\nOptional dictionary of current values\n\n\nshow_title\nbool\nTrue\nWhether to show the schema title\n\n\nshow_description\nbool\nTrue\nWhether to show schema description\n\n\ncompact\nbool\nFalse\nUse compact layout (less spacing)\n\n\ncard_wrapper\nbool\nTrue\nWrap the form in a card component\n\n\nReturns\nFT\n\nFastHTML component containing the generated form UI",
+    "crumbs": [
+      "generators",
+      "form"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "",
+    "text": "pip install cjm_fasthtml_jsonschema",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "",
+    "text": "pip install cjm_fasthtml_jsonschema",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#demo-application",
+    "href": "index.html#demo-application",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "Demo Application",
+    "text": "Demo Application\nRun the demo to see the library in action:\npython demo_app.py\nThen visit:\n\nhttp://localhost:5001/ - Demo page with example form from ./test_files/\n\n$ python ./demo_app.py -h\nusage: demo_app.py [-h] [--schema SCHEMA] [--port PORT] [--host HOST]\n\nJSON Schema to UI Demo Application\n\noptions:\n  -h, --help       show this help message and exit\n  --schema SCHEMA  Path to the JSON schema file (default: test_files/voxtral_config_schema.json)\n  --port PORT      Port to run the server on (default: 5001)\n  --host HOST      Host to run the server on (default: 0.0.0.0)",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#project-structure",
+    "href": "index.html#project-structure",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "Project Structure",
+    "text": "Project Structure\nnbs/\n├── components/ (1)\n│   └── fields.ipynb  # Field component generators for different JSON Schema types.\n├── core/ (3)\n│   ├── dataclass.ipynb  # Dataclass-to-JSON-schema conversion utilities for form generation\n│   ├── parser.ipynb     # JSON Schema parsing utilities.\n│   └── types.ipynb      # Type definitions for JSON Schema elements.\n└── generators/ (1)\n    └── form.ipynb  # Main form generator that creates UI from JSON Schema.\nTotal: 5 notebooks across 3 directories",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#module-dependencies",
+    "href": "index.html#module-dependencies",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "Module Dependencies",
+    "text": "Module Dependencies\ngraph LR\n    components_fields[components.fields&lt;br/&gt;fields]\n    core_dataclass[core.dataclass&lt;br/&gt;Dataclass Utilities]\n    core_parser[core.parser&lt;br/&gt;parser]\n    core_types[core.types&lt;br/&gt;types]\n    generators_form[generators.form&lt;br/&gt;form]\n\n    components_fields --&gt; core_types\n    core_parser --&gt; core_types\n    generators_form --&gt; core_parser\n    generators_form --&gt; components_fields\n4 cross-module dependencies detected",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#cli-reference",
+    "href": "index.html#cli-reference",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "CLI Reference",
+    "text": "CLI Reference\nNo CLI commands found in this project.",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "index.html#module-overview",
+    "href": "index.html#module-overview",
+    "title": "cjm-fasthtml-jsonschema",
+    "section": "Module Overview",
+    "text": "Module Overview\nDetailed documentation for each module in the project:\n\nDataclass Utilities (dataclass.ipynb)\n\nDataclass-to-JSON-schema conversion utilities for form generation\n\n\nImport\nfrom cjm_fasthtml_jsonschema.core.dataclass import (\n    SCHEMA_TITLE,\n    SCHEMA_DESC,\n    SCHEMA_MIN,\n    SCHEMA_MAX,\n    SCHEMA_ENUM,\n    SCHEMA_MIN_LEN,\n    SCHEMA_MAX_LEN,\n    SCHEMA_PATTERN,\n    SCHEMA_FORMAT,\n    dataclass_to_jsonschema\n)\n\n\nFunctions\ndef _python_type_to_json_type(\n    python_type: type  # Python type annotation to convert\n) -&gt; Dict[str, Any]:  # JSON schema type definition\n    \"Convert Python type to JSON schema type.\"\ndef dataclass_to_jsonschema(\n    cls: type  # Dataclass with field metadata\n) -&gt; Dict[str, Any]:  # JSON schema dictionary\n    \"Convert a dataclass to a JSON schema for form generation.\"\n\n\nVariables\nSCHEMA_TITLE = 'title'  # Display title for the field\nSCHEMA_DESC = 'description'  # Help text description\nSCHEMA_MIN = 'minimum'  # Minimum value for numbers\nSCHEMA_MAX = 'maximum'  # Maximum value for numbers\nSCHEMA_ENUM = 'enum'  # Allowed values for dropdowns\nSCHEMA_MIN_LEN = 'minLength'  # Minimum string length\nSCHEMA_MAX_LEN = 'maxLength'  # Maximum string length\nSCHEMA_PATTERN = 'pattern'  # Regex pattern for strings\nSCHEMA_FORMAT = 'format'  # String format (email, uri, date, etc.)\n\n\n\nfields (fields.ipynb)\n\nField component generators for different JSON Schema types.\n\n\nImport\nfrom cjm_fasthtml_jsonschema.components.fields import (\n    create_label,\n    create_description,\n    create_string_field,\n    create_enum_field,\n    create_number_field,\n    create_range_field,\n    create_boolean_field,\n    create_field\n)\n\n\nFunctions\ndef create_label(\n    prop: SchemaProperty  # SchemaProperty object\n) -&gt; FT:  # Label component\n    \"Create a label for a field.\"\ndef create_description(\n    prop: SchemaProperty  # SchemaProperty object\n) -&gt; Optional[FT]:  # P component with description or None\n    \"Create a description/help text for a field.\"\ndef create_string_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create a string input field.\"\ndef create_enum_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create an enum select dropdown field.\"\ndef create_number_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create a number input field.\"\ndef create_range_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create a range slider field.\"\ndef create_boolean_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create a boolean toggle field.\"\ndef create_field(\n    prop: SchemaProperty,  # SchemaProperty object\n    value: Any = None  # Current value\n) -&gt; FT:  # Div containing the field\n    \"Create an appropriate field based on the property type.\"\n\n\n\nform (form.ipynb)\n\nMain form generator that creates UI from JSON Schema.\n\n\nImport\nfrom cjm_fasthtml_jsonschema.generators.form import (\n    generate_form_ui\n)\n\n\nFunctions\ndef generate_form_ui(\n    schema: Dict[str, Any],  # JSON Schema dictionary\n    values: Optional[Dict[str, Any]] = None,  # Optional dictionary of current values\n    show_title: bool = True,  # Whether to show the schema title\n    show_description: bool = True,  # Whether to show schema description\n    compact: bool = False,  # Use compact layout (less spacing)\n    card_wrapper: bool = True  # Wrap the form in a card component\n) -&gt; FT:  # FastHTML component containing the generated form UI\n    \"Generate a FastHTML form UI from a JSON Schema.\"\n\n\n\nparser (parser.ipynb)\n\nJSON Schema parsing utilities.\n\n\nImport\nfrom cjm_fasthtml_jsonschema.core.parser import (\n    SchemaParser\n)\n\n\nClasses\nclass SchemaParser:\n    def __init__(\n        self,\n        schema: Dict[str, Any]  # JSON Schema dictionary\n    )\n    \"Parse JSON Schema and extract property information.\"\n    \n    def __init__(\n            self,\n            schema: Dict[str, Any]  # JSON Schema dictionary\n        )\n        \"Initialize parser with a JSON Schema.\"\n    \n    def get_property(\n            self,\n            name: str  # Property name\n        ) -&gt; Optional[SchemaProperty]:  # SchemaProperty object or None if not found\n        \"Get a specific property by name.\"\n    \n    def get_required_properties(\n            self\n        ) -&gt; List[SchemaProperty]:  # List of all required SchemaProperty objects\n        \"Get all required properties.\"\n    \n    def get_optional_properties(\n            self\n        ) -&gt; List[SchemaProperty]:  # List of all optional SchemaProperty objects\n        \"Get all optional properties.\"\n\n\n\ntypes (types.ipynb)\n\nType definitions for JSON Schema elements.\n\n\nImport\nfrom cjm_fasthtml_jsonschema.core.types import (\n    SchemaProperty\n)\n\n\nClasses\n@dataclass\nclass SchemaProperty:\n    \"Represents a single property in a JSON Schema.\"\n    \n    name: str\n    schema: Dict[str, Any]\n    required: bool = False\n    value: Any\n    \n    def type(\n            self\n        ) -&gt; str:  # The property's type (e.g., 'string', 'number', 'boolean')\n        \"Get the property type.\"\n    \n    def is_nullable(\n            self\n        ) -&gt; bool:  # True if the property allows null values\n        \"Check if property allows null values.\"\n    \n    def default(\n            self\n        ) -&gt; Any:  # The default value for this property, or None if not specified\n        \"Get default value if specified.\"\n    \n    def description(\n            self\n        ) -&gt; Optional[str]:  # The property's description text, or None if not provided\n        \"Get property description.\"\n    \n    def enum_values(\n            self\n        ) -&gt; Optional[List[Any]]:  # List of allowed enum values, or None if not an enum\n        \"Get enum values if property is an enum.\"\n    \n    def examples(\n            self\n        ) -&gt; Optional[List[Any]]:  # List of example values, or None if not provided\n        \"Get example values if provided.\"\n    \n    def minimum(\n            self\n        ) -&gt; Optional[Union[int, float]]:  # Minimum allowed value for numeric types, or None if not specified\n        \"Get minimum value for numeric types.\"\n    \n    def maximum(\n            self\n        ) -&gt; Optional[Union[int, float]]:  # Maximum allowed value for numeric types, or None if not specified\n        \"Get maximum value for numeric types.\"\n    \n    def min_length(\n            self\n        ) -&gt; Optional[int]:  # Minimum length for string types, or None if not specified\n        \"Get minimum length for string types.\"\n    \n    def max_length(\n            self\n        ) -&gt; Optional[int]:  # Maximum length for string types, or None if not specified\n        \"Get maximum length for string types.\"\n    \n    def pattern(\n            self\n        ) -&gt; Optional[str]:  # Regex pattern for string validation, or None if not specified\n        \"Get regex pattern for string validation.\"\n    \n    def format(\n            self\n        ) -&gt; Optional[str]:  # Format hint (e.g., 'email', 'uri', 'date'), or None if not specified\n        \"Get format hint (e.g., 'email', 'uri', 'date').\"",
+    "crumbs": [
+      "cjm-fasthtml-jsonschema"
+    ]
+  },
+  {
+    "objectID": "core/types.html",
+    "href": "core/types.html",
+    "title": "types",
+    "section": "",
+    "text": "source\n\nSchemaProperty\n\n SchemaProperty (name:str, schema:Dict[str,Any], required:bool=False,\n                 value:Any=None)\n\nRepresents a single property in a JSON Schema.",
+    "crumbs": [
+      "core",
+      "types"
+    ]
+  }
+]

@@ -24,11 +24,15 @@ from cjm_fasthtml_jsonschema.generators.form import generate_form_ui
 static_path = Path(__file__).absolute().parent
 
 # Create the FastHTML app with DaisyUI headers
+APP_ID = "jschema"
+
 app, rt = fast_app(
     pico=False,
     hdrs=[*get_daisyui_headers()],
     title="JSON Schema to UI Demo",
-    static_path=str(static_path)
+    static_path=str(static_path),
+    session_cookie=f'session_{APP_ID}_',
+    secret_key=f'{APP_ID}-demo-secret',
 )
 
 app.hdrs.append(Link(rel='icon', type='image/png', href='/static/layout-template.png'))  # for PNG

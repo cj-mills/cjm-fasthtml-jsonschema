@@ -1,3 +1,30 @@
 [build-system]
-requires = ["setuptools>=64.0,<76.0"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "cjm-fasthtml-jsonschema"
+dynamic = ["version"]
+description = "Library for generating FastHTML user interfaces from JSON Schema configurations."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Apache-2.0"}
+authors = [{name = "Christian J. Mills", email = "9126128+cj-mills@users.noreply.github.com"}]
+keywords = ['nbdev', 'jupyter', 'notebook', 'python']
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = ['fastcore', 'python-fasthtml', 'cjm-fasthtml-daisyui', 'jsonschema']
+
+[project.urls]
+Repository = "https://github.com/cj-mills/cjm-fasthtml-jsonschema"
+Documentation = "https://cj-mills.github.io/cjm-fasthtml-jsonschema"
+
+[project.entry-points.nbdev]
+cjm_fasthtml_jsonschema = "cjm_fasthtml_jsonschema._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "cjm_fasthtml_jsonschema.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["cjm_fasthtml_jsonschema"]
+
+[tool.nbdev]

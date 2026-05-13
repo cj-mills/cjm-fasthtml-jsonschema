@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/index.html</loc>
+    <lastmod>2026-05-13T22:25:05.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/core/dataclass.html</loc>
+    <lastmod>2026-05-13T22:25:05.467Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/components/fields.html</loc>
+    <lastmod>2026-05-13T22:25:05.703Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/generators/form.html</loc>
+    <lastmod>2026-05-13T22:25:05.712Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/core/types.html</loc>
+    <lastmod>2026-05-13T22:25:05.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cj-mills.github.io/cjm-fasthtml-jsonschema/core/parser.html</loc>
+    <lastmod>2026-05-13T22:25:05.473Z</lastmod>
+  </url>
+</urlset>
